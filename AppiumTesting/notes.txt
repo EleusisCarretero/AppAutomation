@@ -1,0 +1,6 @@
+1 intall appium in windows: pip install Appium-Python-Client
+2 Steps to connect divice wireless
+    - connect device with USB
+    - in the adb path in command line enter:
+        adb tcpip 5555
+        adb connect <devide_ip>:5555
