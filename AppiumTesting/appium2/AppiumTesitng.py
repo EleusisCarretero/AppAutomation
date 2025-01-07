@@ -1,46 +1,31 @@
 import time
+
 from appium import webdriver
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
+from appium.options.android import UiAutomator2Options
 
-# Configuración de opciones
+# Configuración del dispositivo
 options = UiAutomator2Options()
-options.deviceName = 'Android'
-options.platformName = 'Android'
-options.browserName = 'Chrome'
-# options.automationName = 'UiAutomator2'
+options.platformName = "Android"
+options.deviceName = "192.168.1.64:5555"  # Verifica con 'adb devices'
+options.automationName = "UiAutomator2"
+options.appPackage = "com.samsung.android.dialer"
+options.appActivity = ".DialtactsActivity"
+options.noReset = True
+options.newCommandTimeout = 300
 
-# Inicia el driver
-driver = webdriver.Remote('http://127.0.0.1:4723', options=options)
 
-# Abre Wikipedia
-driver.get("http://wikipedia.org")
-# print(driver.title)
 
-# Espera explícita para el dropdown
-print(driver.contexts)  # Lista todos los contextos disponibles
-driver.switch_to.context("WEBVIEW_chrome")  # Cambia al contexto WebView
+# Conexión con el servidor Appium
+driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 
-# wait = WebDriverWait(driver, 10)
-# dropdown = wait.until(EC.presence_of_element_located(AppiumBy.ID, "searchLanguage"))
-dropdown = driver.find_element(AppiumBy.XPATH, "//select[@id='searchLanguage']")
+driver.find_element(AppiumBy.ID,'com.android.dialer:id/one').click()
+driver.find_element(AppiumBy.ID,'com.android.dialer:id/two').click()
+driver.find_element(AppiumBy.ID,'com.android.dialer:id/three').click()
+driver.find_element(AppiumBy.ID,'com.android.dialer:id/five').click()
 
-# Selecciona el idioma
-select = Select(dropdown)
-select.select_by_value("hi")
+driver.find_element(AppiumBy.ID,'com.android.dialer:id/dialButtonSim1').click()
 
-# Encuentra y cuenta las opciones
-options_elements = driver.find_elements(By.TAG_NAME, "option")
-print(len(options_elements))
 
-# Imprime texto y atributo "Lang" de cada opción
-for option in options_elements:
-    print("Text is:", option.text, "Lang is:", option.get_attribute('lang'))
-
-# Finaliza el driver
 time.sleep(2)
 driver.quit()
