@@ -39,9 +39,6 @@ class CalculatorManager:
     def perform_calculation(self):
         self._click_on_operation("Calculation")
 
-    # def operation_manager(self, operation):
-    #     yield random.random(1, 10)
-    #     operation()
 
 
 if __name__ == "__main__":
