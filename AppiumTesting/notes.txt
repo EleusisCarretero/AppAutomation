@@ -4,3 +4,9 @@
     - in the adb path in command line enter:
         adb tcpip 5555
         adb connect <devide_ip>:5555
+
+Check activity:
+    1 Open appium shell
+        adb shell
+    2 look for activity
+        dumpsys window windows | grep -E 'mTopActivityComponent'
