@@ -42,12 +42,22 @@ class CalculatorManager:
 
 
 if __name__ == "__main__":
-    options = UiAutomator2Options()
-    options.platformName="Android"
-    options.deviceName = "192.168.1.64:5555"
-    options.automationName = "UiAutomator2"
-    options.appPackage = "com.sec.android.app.popupcalculator"
-    options.appActivity = "com.sec.android.app.popupcalculator.Calculator"
+    # options = UiAutomator2Options()
+    # options.platformName="Android"
+    # options.deviceName = "Android"
+    # options.automationName = "UiAutomator2"
+    # options.appPackage = "com.sec.android.app.popupcalculator"
+    # options.appActivity = "com.sec.android.app.popupcalculator.Calculator"
+
+    
+    desired_caps = dict(
+        platformName="Android",
+        deviceName = "Android",
+        automationName = "UiAutomator2",
+        appPackage = "com.sec.android.app.popupcalculator",
+        appActivity = "com.sec.android.app.popupcalculator.Calculator"
+    )
+    options = UiAutomator2Options().load_capabilities(desired_caps)
 
     driver = webdriver.Remote('http://127.0.0.1:4723', options=options)
     # Launch 'manually' the calculator app
