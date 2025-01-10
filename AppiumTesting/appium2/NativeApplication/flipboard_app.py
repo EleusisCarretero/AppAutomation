@@ -16,6 +16,7 @@ if __name__ == "__main__":
     options = UiAutomator2Options().load_capabilities(desired_caps)
 
     driver = webdriver.Remote('http://127.0.0.1:4723', options=options)
+    driver.implicitly_wait(10)
     # Get started
     driver.find_element(AppiumBy.ID, "flipboard.app:id/first_launch_get_started_button").click()
     # Chose options
@@ -29,9 +30,14 @@ if __name__ == "__main__":
     #swipe 
     duration = 1000
     _times = 4
-    for x, y, step_y in [(870, 1000, -400), (970, 1000, 4000)]:
+    for x, y, step_y in [(930, 1000, -400), (930, 1000, 4000)]:
         for _ in range(_times):
             driver.swipe(x,y,x,y + step_y, duration=duration)
+            time.sleep(1)
+    time.sleep(3)
+    for x, y, step_x in [(930, 1000, -800), (120, 1000, 800)]:
+        for _ in range(2):
+            driver.swipe(x,y,x+step_x,y, duration=duration)
             time.sleep(1)
 
     driver.quit()
